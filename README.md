@@ -54,8 +54,9 @@ the app to run:
 
 - Update docstrings
 - Move functions out of main() into separate functions
-- Place totals etx into a dictionary that can be passed around functions
-- Place totals, start frequency and start amount into main()
+- Place totals etc into a dictionary that can be passed around functions
+- Function to intialise initial values in dict and called from main()
+- Refactor functions to receive the totals dict and to update the dict before returning it
 - Move calculation steps in functions to the return line (rather than returning the variable)
 - Shorten line lengths so within spec
 
