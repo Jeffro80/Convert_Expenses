@@ -15,7 +15,7 @@ The Convert Expenses App converts expenses to weekly, fortnightly, monthly and a
 Version Number 0.1  
 
 App last updated <TBC>  
-Readme last updated 14 March 2019
+Readme last updated 15 March 2019
 
 # Operation
 
@@ -48,12 +48,17 @@ the app to run:
 
 ## Current development step
 
-<TBC>
+- Refactoring of code to improve
 
 ## Required development steps
 
-<TBC>
+- Update docstrings
+- Move functions out of main() into separate functions
+- Place totals etx into a dictionary that can be passed around functions
+- Place totals, start frequency and start amount into main()
+- Move calculation steps in functions to the return line (rather than returning the variable)
+- Shorten line lengths so within spec
 
 ## Future additions
 
-<TBC>
+- Subtract an expense from total
