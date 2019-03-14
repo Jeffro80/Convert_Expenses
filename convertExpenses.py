@@ -1,6 +1,6 @@
 # Author: Jeff Mitchell
-# Date: March 2015
-# Version: 0.11
+# Date: 14 March 2019
+# Version: 0.2
 # Quick Desc: Program to convert expenses into Annual, Monthly, Fortnightly and Weekly
 
 # To be fixed:
@@ -146,54 +146,58 @@ def user_repeat():
         local_repeat = user_repeat()        
     return local_repeat
 
-print("\t\t\tWelcome to Expense Converter")
-print("Version 0.11")
-print("Jeff Mitchell, March 2015")
 
-# make call to options_list()
-selection = 0
-while selection != 4:
-    options_list()
-    selection = user_selection()
-    if selection == 4:
-        break
-    elif selection == 1:
-        start_frequency = user_frequency() # get frequency
-        start_amount = get_start_amount() #get starting amountto be converted
-        annually = frequency_conversion(start_frequency, start_amount) # identify annual total from freqeuncy conversion
-        weekly = convert_weekly(annually)
-        fortnightly = convert_fortnightly(annually)
-        monthly = convert_monthly(annually)
-        # update total amounts
-        total_weekly += weekly
-        total_fortnightly += fortnightly
-        total_monthly += monthly
-        total_annually += annually
-        # function call to display converted amounts
-        display_converted_amounts(weekly, fortnightly, monthly, annually)
-        # function call to display total amounts 
-        display_total_amounts(total_weekly, total_fortnightly, total_monthly, total_annually)
-        repeat = user_repeat()
-        if repeat == "n":
-            selection = 4
-        # complete for remaining options
-    elif selection == 2:
-        display_total_amounts(total_weekly, total_fortnightly, total_monthly, total_annually)
-    elif selection == 3:
-        correct_input = False
-        while correct_input == False:
-            confirm_reset = input("\nAre you sure that yuo want to reset the totals? (y/n): ")
-            confirm_reset = confirm_reset.lower()
-            if confirm_reset != "y" and confirm_reset != "n":
-                print("\nSorry, that is not a valid selection. Please either 'y' or 'n'.")
-            elif confirm_reset == "n":
-                correct_input = True
-            else:
-                total_weekly, total_fortnightly, total_monthly, total_annually = reset_totals()
-                print("\nAll totals have been reset")
-                correct_input = True
+def main():
+	print("\t\t\tWelcome to Expense Converter")
+	print("Version 0.11")
+	print("Jeff Mitchell, March 2015")
 
-print("\nOk, goodbye.")
-input("\n\nPress the enter key to exit.")
+	# make call to options_list()
+	selection = 0
+	while selection != 4:
+		options_list()
+		selection = user_selection()
+		if selection == 4:
+			break
+		elif selection == 1:
+			start_frequency = user_frequency() # get frequency
+			start_amount = get_start_amount() #get starting amountto be converted
+			annually = frequency_conversion(start_frequency, start_amount) # identify annual total from freqeuncy conversion
+			weekly = convert_weekly(annually)
+			fortnightly = convert_fortnightly(annually)
+			monthly = convert_monthly(annually)
+			# update total amounts
+			total_weekly += weekly
+			total_fortnightly += fortnightly
+			total_monthly += monthly
+			total_annually += annually
+			# function call to display converted amounts
+			display_converted_amounts(weekly, fortnightly, monthly, annually)
+			# function call to display total amounts 
+			display_total_amounts(total_weekly, total_fortnightly, total_monthly, total_annually)
+			repeat = user_repeat()
+			if repeat == "n":
+				selection = 4
+			# complete for remaining options
+		elif selection == 2:
+			display_total_amounts(total_weekly, total_fortnightly, total_monthly, total_annually)
+		elif selection == 3:
+			correct_input = False
+			while correct_input == False:
+				confirm_reset = input("\nAre you sure that yuo want to reset the totals? (y/n): ")
+				confirm_reset = confirm_reset.lower()
+				if confirm_reset != "y" and confirm_reset != "n":
+					print("\nSorry, that is not a valid selection. Please either 'y' or 'n'.")
+				elif confirm_reset == "n":
+					correct_input = True
+				else:
+					total_weekly, total_fortnightly, total_monthly, total_annually = reset_totals()
+					print("\nAll totals have been reset")
+					correct_input = True
+
+	print("\nOk, goodbye.")
+	input("\n\nPress the enter key to exit.")
         
-        
+
+if __name__ == '__main__':
+    main()        
