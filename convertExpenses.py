@@ -129,6 +129,14 @@ def help_menu():
             repeat = ad.check_repeat_help()
 
 
+def help_menu_message():
+    """Display the help menu options."""
+    print('\nPlease enter the number for the item you would like help on:\n')
+    print('1: <TBC>')
+    print('2: <TBC>')
+    print('3: <TBC>')
+    print('4: Exit Help Menu')
+
 
 def initialise_values():
     """Create dictionary to hold variables and initialise.
