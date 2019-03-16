@@ -59,8 +59,7 @@ admintools from the custtools library
 - Refactor functions to receive the totals dict and to update the dict before returning it
 - Move calculation steps in functions to the return line (rather than returning the variable)
 - Shorten line lengths so within spec
-- Add import of sys
-- Add import of custtools.admintools
+
 
 
 ## Future additions
