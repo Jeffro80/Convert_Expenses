@@ -38,7 +38,7 @@ Readme last updated 15 March 2019
 The following third-party libraries are imported and therefore are required for
 the app to run:
 
-<TBC>
+admintools from the custtools library
 
 # Development
 
@@ -59,6 +59,9 @@ the app to run:
 - Refactor functions to receive the totals dict and to update the dict before returning it
 - Move calculation steps in functions to the return line (rather than returning the variable)
 - Shorten line lengths so within spec
+- Add import of sys
+- Add import of custtools.admintools
+
 
 ## Future additions
 
