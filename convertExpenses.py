@@ -98,6 +98,38 @@ def get_user_frequency():
     return local_frequency
 
 
+def help_menu():
+    """Display the requested help information."""
+    repeat = True
+    low = 1
+    high = 4
+    while repeat:
+        try_again = False
+        help_menu_message()
+        try:
+            action = int(input('\nPlease enter the number for your '
+                               'selection --> '))
+        except ValueError:
+            print('Please enter a number between {} and {}.'.format(low, high))
+            try_again = True
+        else:
+            if action < low or action > high:
+                print('\nPlease select from the available options ({} - {})'
+                      .format(low, high))
+                try_again = True
+            elif action == low:
+                pass # To Be Written
+            elif action == 2:
+                pass # To Be Written
+            elif action == 3:
+                pass # To Be Written
+            elif action == high:
+                repeat = False
+        if not try_again:
+            repeat = ad.check_repeat_help()
+
+
+
 def initialise_values():
     """Create dictionary to hold variables and initialise.
     
