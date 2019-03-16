@@ -13,11 +13,6 @@
 import custtools.admintools as ad
 import sys
 
-# set initial values for totals
-total_weekly, total_fortnightly, total_monthly, total_annually = 0, 0, 0, 0
-start_frequency = 0
-start_amount = 0
-
 
 def convert_fortnightly(annually):
     local_fortnightly = annually / 26
@@ -86,7 +81,46 @@ def get_start_amount():
     return local_start_amount
 
 
+# get and assign frequency selected by user
+def get_user_frequency():
+    print("""\nPlease enter a number to select a frequency for the expense from the following:\n
+1. Weekly
+2. Fortnightly
+3. Monthly
+4. Annual\n""")
+    correct_input = False
+    while correct_input == False:
+        local_frequency = int(input("Please type a number between 1 and 4 for the frequency of the expense: "))
+        if local_frequency > 0 and local_frequency < 5:
+            correct_input = True
+        else:
+            print("\nThat is not a valid option. Please enter a number between 1 and 4.\n")
+    return local_frequency
+
+
+def initialise_values():
+    """Create dictionary to hold variables and initialise.
+    
+    Creates a dictionary that will hold the variables and initialises these
+    variables. Totals are set to 0 and start_amount and start_frequency are
+    provided by the user.
+    
+    Returns:
+        totals_dict (dict): Totals for user variables.
+    """
+    start = 0
+    totals_dict = {'total_weekly': start, 'total_fortnightly': start,
+                   'total_monthly': start, 'total_annually': start}
+    start_frequency = get_user_frequency()
+    start_amount = get_start_amount()
+    totals_dict['start_frequency'] = start_frequency
+    totals_dict['start_amount'] = start_amount
+    return totals_dict
+
+
 def main():
+    # Create dictionary for values and initialise to 0
+    totals_dict = initialise_values()
     repeat = True
     low = 1
     high = 5
@@ -107,8 +141,6 @@ def main():
             elif action == low:
                 help_menu()
             elif action == 2:
-                start_frequency = user_frequency() # get frequency
-    			start_amount = get_start_amount() #get starting amountto be converted
     			annually = frequency_conversion(start_frequency, start_amount) # identify annual total from freqeuncy conversion
     			weekly = convert_weekly(annually)
     			fortnightly = convert_fortnightly(annually)
@@ -177,21 +209,7 @@ def reset_totals():
     return local_weekly, local_fortnightly, local_monthly, local_annual
 
 
-# get and assign frequency selected by user
-def user_frequency():
-    print("""\nPlease enter a number to select a frequency for the expense from the following:\n
-1. Weekly
-2. Fortnightly
-3. Monthly
-4. Annual\n""")
-    correct_input = False
-    while correct_input == False:
-        local_frequency = int(input("Please type a number between 1 and 4 for the frequency of the expense: "))
-        if local_frequency > 0 and local_frequency < 5:
-            correct_input = True
-        else:
-            print("\nThat is not a valid option. Please enter a number between 1 and 4.\n")
-    return local_frequency
+
 
 
 # see if user wishes to repeat
