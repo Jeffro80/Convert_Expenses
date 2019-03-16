@@ -1,7 +1,8 @@
 # Author: Jeff Mitchell
-# Date: 14 March 2019
+# Date: 17 March 2019
 # Version: 0.2
-# Quick Desc: Program to convert expenses into Annual, Monthly, Fortnightly and Weekly
+# Quick Desc: Program to convert expenses into Annual, Monthly, Fortnightly and
+# Weekly
 
 # To be fixed:
 
@@ -82,71 +83,85 @@ def get_start_amount():
 
 
 def main():
-	print("\t\t\tWelcome to Expense Converter")
-	print("Version 0.11")
-	print("Jeff Mitchell, March 2015")
+    repeat = True
+    low = 1
+    high = 5
+    while repeat:
+        try_again = False
+        main_message()
+        try:
+            action = int(input('\nPlease enter the number for your '
+                               'selection --> '))
+        except ValueError:
+            print('Please enter a number between {} and {}.'.format(low, high))
+            try_again = True
+        else:
+            if action < low or action > high:
+                print('\nPlease select from the available options ({} - {})'
+                      .format(low, high))
+                try_again = True
+            elif action == low:
+                help_menu()
+            elif action == 2:
+                start_frequency = user_frequency() # get frequency
+    			start_amount = get_start_amount() #get starting amountto be converted
+    			annually = frequency_conversion(start_frequency, start_amount) # identify annual total from freqeuncy conversion
+    			weekly = convert_weekly(annually)
+    			fortnightly = convert_fortnightly(annually)
+    			monthly = convert_monthly(annually)
+    			# update total amounts
+    			total_weekly += weekly
+    			total_fortnightly += fortnightly
+    			total_monthly += monthly
+    			total_annually += annually
+    			# function call to display converted amounts
+    			display_converted_amounts(weekly, fortnightly, monthly, annually)
+    			# function call to display total amounts 
+    			display_total_amounts(total_weekly, total_fortnightly, total_monthly, total_annually)
+    			repeat = user_repeat()
+    			if repeat == "n":
+    				selection = 4
+            elif action == 3:
+                display_total_amounts(total_weekly, total_fortnightly, total_monthly, total_annually)
+            elif action == 4:
+                correct_input = False
+    			while correct_input == False:
+    				confirm_reset = input("\nAre you sure that yuo want to reset the totals? (y/n): ")
+    				confirm_reset = confirm_reset.lower()
+    				if confirm_reset != "y" and confirm_reset != "n":
+    					print("\nSorry, that is not a valid selection. Please either 'y' or 'n'.")
+    				elif confirm_reset == "n":
+    					correct_input = True
+    				else:
+    					total_weekly, total_fortnightly, total_monthly, total_annually = reset_totals()
+    					print("\nAll totals have been reset")
+    					correct_input = True
+            elif action == high:
+                print('\nIf you have generated any files, please find them '
+                      'saved to disk. Goodbye.')
+                sys.exit()
+            if not try_again:
+                repeat = ad.check_repeat()
+        print('\nPlease find your files saved to disk. Goodbye.')
 
-	# make call to options_list()
-	selection = 0
-	while selection != 4:
-		options_list()
-		selection = user_selection()
-		if selection == 4:
-			break
-		elif selection == 1:
-			start_frequency = user_frequency() # get frequency
-			start_amount = get_start_amount() #get starting amountto be converted
-			annually = frequency_conversion(start_frequency, start_amount) # identify annual total from freqeuncy conversion
-			weekly = convert_weekly(annually)
-			fortnightly = convert_fortnightly(annually)
-			monthly = convert_monthly(annually)
-			# update total amounts
-			total_weekly += weekly
-			total_fortnightly += fortnightly
-			total_monthly += monthly
-			total_annually += annually
-			# function call to display converted amounts
-			display_converted_amounts(weekly, fortnightly, monthly, annually)
-			# function call to display total amounts 
-			display_total_amounts(total_weekly, total_fortnightly, total_monthly, total_annually)
-			repeat = user_repeat()
-			if repeat == "n":
-				selection = 4
-			# complete for remaining options
-		elif selection == 2:
-			display_total_amounts(total_weekly, total_fortnightly, total_monthly, total_annually)
-		elif selection == 3:
-			correct_input = False
-			while correct_input == False:
-				confirm_reset = input("\nAre you sure that yuo want to reset the totals? (y/n): ")
-				confirm_reset = confirm_reset.lower()
-				if confirm_reset != "y" and confirm_reset != "n":
-					print("\nSorry, that is not a valid selection. Please either 'y' or 'n'.")
-				elif confirm_reset == "n":
-					correct_input = True
-				else:
-					total_weekly, total_fortnightly, total_monthly, total_annually = reset_totals()
-					print("\nAll totals have been reset")
-					correct_input = True
 
-	print("\nOk, goodbye.")
-	input("\n\nPress the enter key to exit.")
+def main_message():
+    """Display menu of options."""
+    print('\n\n*************==========================*****************')
+    print('\nConver Expenses version 0.11')
+    print('Created by Jeff Mitchell, 2019')
+    print('\nOptions:')
+    print('\n1. Help Menu')
+    print('2. Convert an expense')
+    print('3. Show current expense totals')
+    print('4. Reset the current expense totals')
+    print('5. Exit')
 
 
 # convert monthly into annual expense
 def monthly_to_annual(monthly):
     local_annual = monthly * 12
     return local_annual
-
-
-# present options to user
-def options_list():
-    print("""
-What would you like to do? Please enter a number:\n
-1. Convert an expense
-2. Show current expense totals
-3. Reset the current expense totals
-4. Quit\n""")
 
 
 # reset totals to zero
