@@ -1,7 +1,8 @@
 # Author: Jeff Mitchell
-# Date: 14 March 2019
+# Date: 17 March 2019
 # Version: 0.2
-# Quick Desc: Program to convert expenses into Annual, Monthly, Fortnightly and Weekly
+# Quick Desc: Program to convert expenses into Annual, Monthly, Fortnightly and
+# Weekly
 
 # To be fixed:
 
@@ -38,6 +39,13 @@ def display_converted_amounts(weekly, fortnightly, monthly, annually):
     print("Monthly it is: ${:.2f}" .format(monthly))
     print("Annually it is: ${:.2f}" .format(annually))
 
+
+def display_welcome():
+    """Display welcom message to user"""
+    print("\t\t\tWelcome to Expense Converter")
+    print("Version 0.11")
+    print("Jeff Mitchell, March 2019")
+    
 
 # display total amounts
 def display_total_amounts(weekly, fortnightly, monthly, annually):
@@ -82,10 +90,7 @@ def get_start_amount():
 
 
 def main():
-	print("\t\t\tWelcome to Expense Converter")
-	print("Version 0.11")
-	print("Jeff Mitchell, March 2015")
-
+    display_welcome()
 	# make call to options_list()
 	selection = 0
 	while selection != 4:
