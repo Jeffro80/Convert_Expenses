@@ -30,6 +30,7 @@ def convert_expense(totals_dict):
     """
     updated_totals = copy.deepcopy(totals_dict)
     # old code
+    
     '''
     annually = frequency_conversion(start_frequency, start_amount) # identify annual total from freqeuncy conversion
     			weekly = convert_weekly(annually)
@@ -102,7 +103,7 @@ def frequency_conversion(frequency, start_amount):
 
 
 # get and assign starting amount from user
-def get_start_amount():
+def get_amount():
     while True:
         try:
             local_start_amount = float(input("\nWhat is your starting amount? "))
@@ -115,7 +116,7 @@ def get_start_amount():
 
 
 # get and assign frequency selected by user
-def get_user_frequency():
+def get_frequency():
     print("""\nPlease enter a number to select a frequency for the expense from the following:\n
 1. Weekly
 2. Fortnightly
@@ -184,10 +185,10 @@ def initialise_values():
     start = 0
     totals_dict = {'total_weekly': start, 'total_fortnightly': start,
                    'total_monthly': start, 'total_annually': start}
-    start_frequency = get_user_frequency()
-    start_amount = get_start_amount()
-    totals_dict['start_frequency'] = start_frequency
-    totals_dict['start_amount'] = start_amount
+    frequency = get_frequency()
+    amount = get_amount()
+    totals_dict['frequency'] = frequency
+    totals_dict['amount'] = amount
     return totals_dict
 
 
