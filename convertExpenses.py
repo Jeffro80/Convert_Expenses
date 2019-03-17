@@ -102,17 +102,24 @@ def frequency_conversion(frequency, start_amount):
     return local_annual
 
 
-# get and assign starting amount from user
 def get_amount():
+    """Get expense amount from user.
+    
+    Get the expense amount from user and return as a float.
+    
+    Returns:
+        amount (float): Amount of expense.
+    """
     while True:
         try:
-            local_start_amount = float(input("\nWhat is your starting amount? "))
+            amount = float(input('\nWhat is your starting amount? '))
         except ValueError:
-            print("\nSorry that is not a valid starting amount. Please enter a number.")
+            print('\nSorry that is not a valid starting amount. Please enter '
+                  'a number.')
             continue
         else:
             break
-    return local_start_amount
+    return amount
 
 
 def get_frequency():
@@ -122,7 +129,6 @@ def get_frequency():
     
     Returns:
         frequency (str): Frequency of expense.
-        
     """
     frequencies = ['weekly', 'fortnightly', 'monthly', 'annually']
     print('\nPlease enter a number to select frequency of the expense:\n')
