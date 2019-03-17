@@ -201,10 +201,8 @@ def initialise_values():
     start = 0
     totals_dict = {'total_weekly': start, 'total_fortnightly': start,
                    'total_monthly': start, 'total_annually': start}
-    frequency = get_frequency()
-    amount = get_amount()
-    totals_dict['frequency'] = frequency
-    totals_dict['amount'] = amount
+    totals_dict['frequency'] = ''
+    totals_dict['amount'] = 0
     return totals_dict
 
 
