@@ -10,8 +10,41 @@
 # Subtract an expense from total
 
 
+import copy
 import custtools.admintools as ad
 import sys
+
+
+def convert_expense(totals_dict):
+    """Convert an expense into cost per period.
+    
+    Converts a supplied expense into the cost per period and updates the
+    totals_dict with totals based on these costs.
+    
+    Args:
+        totals_dict (dict): Dict holding the current totals value for each
+        period.
+        
+    Returns:
+        updated_totals (dict): Dict with the updated totals for each value.
+    """
+    updated_totals = copy.deepcopy(totals_dict)
+    # old code
+    '''
+    annually = frequency_conversion(start_frequency, start_amount) # identify annual total from freqeuncy conversion
+    			weekly = convert_weekly(annually)
+    			fortnightly = convert_fortnightly(annually)
+    			monthly = convert_monthly(annually)
+    			# update total amounts
+    			total_weekly += weekly
+    			total_fortnightly += fortnightly
+    			total_monthly += monthly
+    			total_annually += annually
+    			# function call to display converted amounts
+    			display_converted_amounts(weekly, fortnightly, monthly, annually)
+    			# function call to display total amounts 
+    			display_total_amounts(total_weekly, total_fortnightly, total_monthly, total_annually)
+    '''
 
 
 def convert_fortnightly(annually):
@@ -181,19 +214,8 @@ def main():
             elif action == low:
                 help_menu()
             elif action == 2:
-    			annually = frequency_conversion(start_frequency, start_amount) # identify annual total from freqeuncy conversion
-    			weekly = convert_weekly(annually)
-    			fortnightly = convert_fortnightly(annually)
-    			monthly = convert_monthly(annually)
-    			# update total amounts
-    			total_weekly += weekly
-    			total_fortnightly += fortnightly
-    			total_monthly += monthly
-    			total_annually += annually
-    			# function call to display converted amounts
-    			display_converted_amounts(weekly, fortnightly, monthly, annually)
-    			# function call to display total amounts 
-    			display_total_amounts(total_weekly, total_fortnightly, total_monthly, total_annually)
+                convert_expense(totals_dict)
+    			
     			repeat = user_repeat()
     			if repeat == "n":
     				selection = 4
