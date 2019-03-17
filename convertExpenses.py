@@ -29,8 +29,19 @@ def convert_expense(totals_dict):
         updated_totals (dict): Dict with the updated totals for each value.
     """
     updated_totals = copy.deepcopy(totals_dict)
-    
-    
+    updated_totals['amount'] = get_amount()
+    updated_totals['frequency'] = get_frequency()
+    amount = updated_totals['amount']
+    frequency = updated_totals['frequency']
+    if frequency != 'annually':
+        # Set amount to an annual amount
+        amount = convert_to_annual(amount, frequency)
+    # Convert amount to each frequency and update totals
+    updated_totals['annually'] += amount
+    updated_totals['monthly'] += convert_to_monthly(amount)
+    updated_totals['fortnightly'] += convert_to_fortnigthly(amount)
+    updated_totals['weekly'] += convert_to_weekly(amount)
+    return updated_totals    
     '''
     annually = frequency_conversion(start_frequency, start_amount) # identify annual total from freqeuncy conversion
     			weekly = convert_weekly(annually)
@@ -229,7 +240,9 @@ def main():
             elif action == low:
                 help_menu()
             elif action == 2:
-                convert_expense(totals_dict)
+                totals_dict = convert_expense(totals_dict)
+                # Display converted amounts
+                # Get next action
     			
     			repeat = user_repeat()
     			if repeat == "n":
