@@ -29,7 +29,7 @@ def convert_expense(totals_dict):
         updated_totals (dict): Dict with the updated totals for each value.
     """
     updated_totals = copy.deepcopy(totals_dict)
-    # old code
+    
     
     '''
     annually = frequency_conversion(start_frequency, start_amount) # identify annual total from freqeuncy conversion
@@ -115,21 +115,31 @@ def get_amount():
     return local_start_amount
 
 
-# get and assign frequency selected by user
 def get_frequency():
-    print("""\nPlease enter a number to select a frequency for the expense from the following:\n
-1. Weekly
-2. Fortnightly
-3. Monthly
-4. Annual\n""")
+    """Get frequency of expense from user.
+    
+    Get the frequency of expense from user and return as a string.
+    
+    Returns:
+        frequency (str): Frequency of expense.
+        
+    """
+    frequencies = ['weekly', 'fortnightly', 'monthly', 'annually']
+    print('\nPlease enter a number to select frequency of the expense:\n')
+    print('1. Weekly')
+    print('2. Fortnightly')
+    print('3. Monthly')
+    print('4. Annually\n')
     correct_input = False
-    while correct_input == False:
-        local_frequency = int(input("Please type a number between 1 and 4 for the frequency of the expense: "))
-        if local_frequency > 0 and local_frequency < 5:
+    while not correct_input:
+        frequency = int(input('Please type a number between 1 and 4 for the '
+                              'frequency of the expense: '))
+        if frequency > 0 and frequency < 5:
             correct_input = True
         else:
-            print("\nThat is not a valid option. Please enter a number between 1 and 4.\n")
-    return local_frequency
+            print('\nThat is not a valid option. Please enter a number '
+                  'between 1 and 4.\n')
+    return frequencies[frequency-1]
 
 
 def help_menu():
