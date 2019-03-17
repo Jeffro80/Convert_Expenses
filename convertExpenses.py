@@ -91,11 +91,11 @@ def fortnightly_to_annual(fortnightly):
 # expenses are converted to an annual amount
 # annual amount is then converted into the other three categories and returned
 def frequency_conversion(frequency, start_amount):
-    if frequency == 1:
+    if frequency == 'weekly':
         local_annual = weekly_to_annual(start_amount)
-    elif frequency == 2:
+    elif frequency == 'fortnightly':
         local_annual = fortnightly_to_annual(start_amount)
-    elif frequency == 3:
+    elif frequency == 'monthly':
         local_annual = monthly_to_annual(start_amount)
     else:
         local_annual = start_amount
