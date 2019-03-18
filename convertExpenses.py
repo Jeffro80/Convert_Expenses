@@ -1,5 +1,5 @@
 # Author: Jeff Mitchell
-# Date: 17 March 2019
+# Date: 18 March 2019
 # Version: 0.2
 # Quick Desc: Program to convert expenses into Annual, Monthly, Fortnightly and
 # Weekly
@@ -13,6 +13,25 @@
 import copy
 import custtools.admintools as ad
 import sys
+
+
+def confirm_reset():
+    """Confirm that user wishes to reset totals_dict.
+    
+    Returns:
+        (bool): True if to reset, False otherwise.
+    """
+    correct_input = False
+    while not correct_input:
+        reset = input('\nAre you sure that yoo want to reset the totals? '
+                      '(y/n): ').lower()
+        if reset != 'y' and reset != 'n':
+            print('\nSorry, that is not a valid selection. Please either '
+                  '"y" or "n".')
+        elif reset == "n":
+            return False
+        else:
+            return True
 
 
 def convert_expense(totals_dict):
@@ -290,14 +309,7 @@ def main():
                 if not confirm_reset():
                     continue
                 reset_values(totals_dict)
-                correct_input = False
-    			while correct_input == False:
-    				confirm_reset = input("\nAre you sure that yuo want to reset the totals? (y/n): ")
-    				confirm_reset = confirm_reset.lower()
-    				if confirm_reset != "y" and confirm_reset != "n":
-    					print("\nSorry, that is not a valid selection. Please either 'y' or 'n'.")
-    				elif confirm_reset == "n":
-    					correct_input = True
+                
     				else:
     					total_weekly, total_fortnightly, total_monthly, total_annually = reset_totals()
     					print("\nAll totals have been reset")
@@ -324,7 +336,6 @@ def main_message():
     print('5. Exit')
 
 
-# convert monthly into annual expense
 def monthly_to_annual(monthly):
     """Convert monthly amount to annual cost.
     
