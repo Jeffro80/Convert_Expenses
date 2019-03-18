@@ -308,12 +308,8 @@ def main():
             elif action == 4:
                 if not confirm_reset():
                     continue
-                reset_values(totals_dict)
-                
-    				else:
-    					total_weekly, total_fortnightly, total_monthly, total_annually = reset_totals()
-    					print("\nAll totals have been reset")
-    					correct_input = True
+                totals_dict = reset_totals(totals_dict)
+                print('\nAll totals have been reset.')
             elif action == high:
                 print('\nIf you have generated any files, please find them '
                       'saved to disk. Goodbye.')
