@@ -46,10 +46,10 @@ def convert_expense(totals_dict):
     totals_list.append(convert_to_monthly(amount))
     totals_list.append(amount)
     # Update totals_dict
-    updated_totals['weekly'] += totals_list[2]
-    updated_totals['fortnightly'] += totals_list[3]
-    updated_totals['monthly'] += totals_list[4]
-    updated_totals['annually'] += totals_list[5]
+    updated_totals['total_weekly'] += totals_list[2]
+    updated_totals['total_fortnightly'] += totals_list[3]
+    updated_totals['total_monthly'] += totals_list[4]
+    updated_totals['total_annually'] += totals_list[5]
     # Display converted values for this amount and frequency    
     display_converted_amounts(totals_list)
     return updated_totals    
@@ -92,11 +92,14 @@ def display_total_amounts(totals_dict):
     Args:
         totals_dict (dict): Dict with totals by frequency.
     """
-    print('\nTotal weekly expenses are: ${:.2f}'.format(totals_dict['weekly']))
+    print('\nTotal weekly expenses are: ${:.2f}'.format(
+            totals_dict['total_weekly']))
     print('Total fortnightly expenses are: ${:.2f}'.format(
-            totals_dict['fortnightly']))
-    print('Total monthly expenses are: ${:.2f}'.format(totals_dict['monthly']))
-    print('Total annual expenses are: ${:.2f}'.format(totals_dict['annually']))
+            totals_dict['total_fortnightly']))
+    print('Total monthly expenses are: ${:.2f}'.format(
+            totals_dict['total_monthly']))
+    print('Total annual expenses are: ${:.2f}'.format(
+            totals_dict['total_annually']))
 	
 	
 # convert fortnightly into annual expense
