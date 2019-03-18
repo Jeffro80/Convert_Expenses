@@ -55,14 +55,14 @@ def convert_expense(totals_dict):
     frequency = updated_totals['frequency']
     if frequency != 'annually':
         # Set amount to an annual amount
-        amount = convert_to_annual(amount, frequency)
+        amount = frequency_conversion(amount, frequency)
     # Convert amount to each frequency
     totals_list = []
     totals_list.append(updated_totals['amount'])
     totals_list.append(frequency)
-    totals_list.append(convert_to_weekly(amount))
-    totals_list.append(convert_to_fortnigthly(amount))
-    totals_list.append(convert_to_monthly(amount))
+    totals_list.append(convert_weekly(amount))
+    totals_list.append(convert_fortnightly(amount))
+    totals_list.append(convert_monthly(amount))
     totals_list.append(amount)
     # Update totals_dict
     updated_totals['total_weekly'] += totals_list[2]
@@ -117,7 +117,7 @@ def display_converted_amounts(totals_list):
         totals_list (list): List with amount, frequency and totals starting
         with weekly.
     """
-    print('\nA starting amount of ${:.2f} ({:.2f}) converts as follows: '
+    print('\nA starting amount of ${:.2f} ({}) converts as follows: '
           .format(totals_list[0], totals_list[1]))
     print('\nWeekly it is: ${:.2f}'.format(totals_list[2]))
     print('Fortnightly it is: ${:.2f}'.format(totals_list[3]))
@@ -153,7 +153,7 @@ def fortnightly_to_annual(fortnightly):
     return fortnightly * 26
 
 
-def frequency_conversion(frequency, amount):
+def frequency_conversion(amount, frequency):
     """Convert a start amount to an annual amount.
     
     Annual amount calculated according to the frequency of the amount.
