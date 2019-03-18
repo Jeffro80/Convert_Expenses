@@ -72,21 +72,31 @@ def convert_weekly(annually):
 
 
 def display_converted_amounts(totals_list):
-    """Display conversion amounts per frequency for a total."""
-    print('\nA starting amount of ${} ({}) converts as follows: '.format(
-            totals_list[0], totals_list[1]))
-    print('\nWeekly it is: ${}'.format(totals_list[2]))
-    print('Fortnightly it is: ${}'.format(totals_list[3]))
-    print('Monthly it is: ${}'.format(totals_list[4]))
-    print('Annually it is: ${}'.format(totals_list[5]))
+    """Display conversion amounts per frequency for a total.
+    
+    Args:
+        totals_list (list): List with amount, frequency and totals starting
+        with weekly.
+    """
+    print('\nA starting amount of ${:.2f} ({:.2f}) converts as follows: '
+          .format(totals_list[0], totals_list[1]))
+    print('\nWeekly it is: ${:.2f}'.format(totals_list[2]))
+    print('Fortnightly it is: ${:.2f}'.format(totals_list[3]))
+    print('Monthly it is: ${:.2f}'.format(totals_list[4]))
+    print('Annually it is: ${:.2f}'.format(totals_list[5]))
 
 
-# display total amounts
-def display_total_amounts(weekly, fortnightly, monthly, annually):
-    print("\nTotal weekly expenses are: ${:.2f}" .format(weekly))
-    print("Total fortnightly expenses are: ${:.2f}" .format(fortnightly))
-    print("Total monthly expenses are: ${:.2f}" .format(monthly))
-    print("Total annual expenses are: ${:.2f}" .format(annually))
+def display_total_amounts(totals_dict):
+    """Display the total expenses for each period.
+    
+    Args:
+        totals_dict (dict): Dict with totals by frequency.
+    """
+    print('\nTotal weekly expenses are: ${:.2f}'.format(totals_dict['weekly']))
+    print('Total fortnightly expenses are: ${:.2f}'.format(
+            totals_dict['fortnightly']))
+    print('Total monthly expenses are: ${:.2f}'.format(totals_dict['monthly']))
+    print('Total annual expenses are: ${:.2f}'.format(totals_dict['annually']))
 	
 	
 # convert fortnightly into annual expense
@@ -239,7 +249,7 @@ def main():
             elif action == 2:
                 totals_dict = convert_expense(totals_dict)
             elif action == 3:
-                display_total_amounts(total_weekly, total_fortnightly, total_monthly, total_annually)
+                display_total_amounts(totals_dict)
             elif action == 4:
                 correct_input = False
     			while correct_input == False:
