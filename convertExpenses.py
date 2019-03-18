@@ -56,19 +56,39 @@ def convert_expense(totals_dict):
 
 
 def convert_fortnightly(annually):
-    local_fortnightly = annually / 26
-    return local_fortnightly
+    """Convert annual amount to fortnightly cost.
+    
+    Args:
+        annually (float): Annual cost.
+        
+    Returns:
+        (float): Fortnightly cost.
+    """
+    return annually / 26
 
 
 def convert_monthly(annually):
-    local_monthly = annually / 12
-    return local_monthly
+    """Convert annual amount to monthly cost.
+    
+    Args:
+        annually (float): Annual cost.
+        
+    Returns:
+        (float): Monthly cost.
+    """
+    return annually / 12
 	
 
-# convert annual expenses into weekly, fortnightly and monthly amounts
 def convert_weekly(annually):
-    local_weekly = annually / 52
-    return local_weekly
+    """Convert annual amount to weekly cost.
+    
+    Args:
+        annually (float): Annual cost.
+        
+    Returns:
+        (float): Weekly cost.
+    """
+    return annually / 52
 
 
 def display_converted_amounts(totals_list):
@@ -102,10 +122,16 @@ def display_total_amounts(totals_dict):
             totals_dict['total_annually']))
 	
 	
-# convert fortnightly into annual expense
 def fortnightly_to_annual(fortnightly):
-    local_annual = fortnightly * 26
-    return local_annual
+    """Convert fortnightly amount to annual cost.
+    
+    Args:
+        fortnightly (float): Fortnightly cost.
+        
+    Returns:
+        (float): Annual cost.
+    """
+    return fortnightly * 26
 
 
 # make calculations by calling functions based on frequency.
@@ -290,8 +316,15 @@ def main_message():
 
 # convert monthly into annual expense
 def monthly_to_annual(monthly):
-    local_annual = monthly * 12
-    return local_annual
+    """Convert monthly amount to annual cost.
+    
+    Args:
+        monthly (float): Monthly cost.
+        
+    Returns:
+        (float): Annual cost.
+    """
+    return monthly * 12
 
 
 # reset totals to zero
@@ -339,10 +372,16 @@ def user_selection():
     return local_selection
 
 
-# convert weekly into annual expense
 def weekly_to_annual(weekly):
-    local_annual = weekly * 52
-    return local_annual
+    """Convert weekly amount to annual cost.
+    
+    Args:
+        weekly (float): Weekly cost.
+        
+    Returns:
+        (float): Annual cost.
+    """
+    return weekly * 52
 	
 	
 if __name__ == '__main__':
