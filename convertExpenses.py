@@ -23,7 +23,7 @@ def confirm_reset():
     """
     correct_input = False
     while not correct_input:
-        reset = input('\nAre you sure that yoo want to reset the totals? '
+        reset = input('\nAre you sure that you want to reset the totals? '
                       '(y/n): ').lower()
         if reset != 'y' and reset != 'n':
             print('\nSorry, that is not a valid selection. Please either '
