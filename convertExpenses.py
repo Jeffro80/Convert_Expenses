@@ -134,19 +134,26 @@ def fortnightly_to_annual(fortnightly):
     return fortnightly * 26
 
 
-# make calculations by calling functions based on frequency.
-# expenses are converted to an annual amount
-# annual amount is then converted into the other three categories and returned
-def frequency_conversion(frequency, start_amount):
+def frequency_conversion(frequency, amount):
+    """Convert a start amount to an annual amount.
+    
+    Annual amount calculated according to the frequency of the amount.
+    
+    Args:
+        frequency (str): Frequency of payments.
+        amount (float): Expense amount per frequency period.
+    
+    Returns:
+        (float): Annual expense amount.
+    """
     if frequency == 'weekly':
-        local_annual = weekly_to_annual(start_amount)
+        return weekly_to_annual(amount)
     elif frequency == 'fortnightly':
-        local_annual = fortnightly_to_annual(start_amount)
+        return fortnightly_to_annual(amount)
     elif frequency == 'monthly':
-        local_annual = monthly_to_annual(start_amount)
+        return monthly_to_annual(amount)
     else:
-        local_annual = start_amount
-    return local_annual
+        return amount
 
 
 def get_amount():
