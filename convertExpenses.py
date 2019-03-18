@@ -287,6 +287,9 @@ def main():
             elif action == 3:
                 display_total_amounts(totals_dict)
             elif action == 4:
+                if not confirm_reset():
+                    continue
+                reset_values(totals_dict)
                 correct_input = False
     			while correct_input == False:
     				confirm_reset = input("\nAre you sure that yuo want to reset the totals? (y/n): ")
@@ -334,13 +337,22 @@ def monthly_to_annual(monthly):
     return monthly * 12
 
 
-# reset totals to zero
-def reset_totals():
-    local_weekly = 0
-    local_fortnightly = 0
-    local_monthly = 0
-    local_annual = 0
-    return local_weekly, local_fortnightly, local_monthly, local_annual
+def reset_totals(totals_dict):
+    """Reset totals_dict to zero for each variable.
+    
+    Args:
+        totals_dict (dict): Dictionary holding expense totals.
+        
+    Returns:
+        totals_dict (dict): totals_dict with expense totals rest to 0.
+    """
+    totals_dict['total_weekly'] = 0
+    totals_dict['total_fortnightly'] = 0
+    totals_dict['total_monthly'] = 0
+    totals_dict['total_annually'] = 0
+    totals_dict['frequency'] = ''
+    totals_dict['amount'] = 0
+    return totals_dict
 
 
 
