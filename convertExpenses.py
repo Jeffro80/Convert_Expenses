@@ -25,7 +25,7 @@ def confirm_reset():
     while not correct_input:
         reset = input('\nAre you sure that you want to reset the totals? '
                       '(y/n): ').lower()
-        if reset != 'y' and reset != 'n':
+        if reset not in ['y', 'n']:
             print('\nSorry, that is not a valid selection. Please either '
                   '"y" or "n".')
         elif reset == "n":
@@ -362,10 +362,6 @@ def reset_totals(totals_dict):
     return totals_dict
 
 
-
-
-
-# see if user wishes to repeat
 def user_repeat():
     # y/n and check if neither selected
     local_repeat = input("\nDo you want to continue with another amount or selection? (y/n): ")
