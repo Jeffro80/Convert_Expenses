@@ -56,10 +56,6 @@ admintools from the custtools library
 - Add helper functions
 - Update help_menu_message() with help function descriptions
 - Thorough testing of app
-- Update user_repeat()
-- Update user_selection()
-
-
 
 ## Future additions
 
