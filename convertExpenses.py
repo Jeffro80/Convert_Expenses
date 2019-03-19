@@ -360,27 +360,6 @@ def reset_totals(totals_dict):
     totals_dict['frequency'] = ''
     totals_dict['amount'] = 0
     return totals_dict
-	
-	
-def user_selection():
-    correct_input = False
-    while correct_input == False:
-        while True:
-            try:
-                local_selection = int(input("Please make a selection: "))
-            except ValueError:
-                print("\nSorry, that is not a valid selection. Please enter a number between 1 and 4.\n")
-                continue
-            else:
-                break
-
-        if local_selection > 0 and local_selection < 5:
-            correct_input = True
-        else:
-            print("\nYou must enter a number betweeen 1 and 4\n")
-        
-    # return selection
-    return local_selection
 
 
 def weekly_to_annual(weekly):
