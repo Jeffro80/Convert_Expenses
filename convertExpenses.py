@@ -360,19 +360,8 @@ def reset_totals(totals_dict):
     totals_dict['frequency'] = ''
     totals_dict['amount'] = 0
     return totals_dict
-
-
-def user_repeat():
-    # y/n and check if neither selected
-    local_repeat = input("\nDo you want to continue with another amount or selection? (y/n): ")
-    local_repeat = local_repeat.lower()
-    if local_repeat != "y" and local_repeat != "n":
-        print("\nSorry, that is not a valid selection. Please either 'y' or 'n'.")
-        local_repeat = user_repeat()        
-    return local_repeat
 	
 	
-# get user selection
 def user_selection():
     correct_input = False
     while correct_input == False:
