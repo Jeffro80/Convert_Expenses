@@ -1,56 +1,43 @@
-# Overview
+# Convert Expenses
 
-The Convert Expenses App converts expenses to weekly, fortnightly, monthly and annual figures.
-
-## Inputs
-
-<TBC>
-
-## Outputs
-
-<TBC>
+Convert Expenses converts expenses to weekly, fortnightly, monthly and annual figures.
+It totals these expenses to provide figures for a weekly, fortnightly, monthly and annual
+budget.
 
 ## Version
 
 Version Number 0.1  
 
-App last updated <TBC>  
-Readme last updated 15 March 2019
+App last updated 17 March 2019  
+Readme last updated 22 March 2019
 
-# Operation
+## Operation
 
-- <TBC>
+Run Convert_Expenses.py from within Spyder etc.
 
-# Functions
+## Functions
 
-## <TBC>
+- Convert an expense into weekly, fortnightly, monthly and annual amounts
+- Show current expense totals
 
-<TBC>
-
-### Required Files
-
-- <TBC>
-
-<TBC>
-
-# Dependencies
+## Dependencies
 
 The following third-party libraries are imported and therefore are required for
 the app to run:
 
-admintools from the custtools library
+- admintools from the custtools library
 
-# Development
+## Development
 
-## Known bugs
+### Known bugs
 
-## Items to fix
+- Nill
 
-## Current development step
+### Current development step
 
 - Refactoring of code to improve
 
-## Required development steps
+### Required development steps
 
 - Update docstrings
 - Move functions out of main() into separate functions
@@ -62,8 +49,9 @@ admintools from the custtools library
 - Add helper functions
 - Update help_menu_message() with help function descriptions
 
-
-
-## Future additions
+### Future additions
 
 - Subtract an expense from total
+
+## License
+The content of this repository is licensed under a [Creative Commons Attribution License](http://creativecommons.org/licenses/by/3.0/us/)
