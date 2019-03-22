@@ -39,19 +39,16 @@ the app to run:
 
 ### Required development steps
 
-- Update docstrings
-- Move functions out of main() into separate functions
-- Place totals etc into a dictionary that can be passed around functions
-- Refactor functions to receive the totals dict and to update the dict before returning it
-- Move calculation steps in functions to the return line (rather than returning the variable)
-- Shorten line lengths so within spec
 - Update help menu with helper function calls
 - Add helper functions
 - Update help_menu_message() with help function descriptions
 
-### Future additions
+## Future additions
 
+- Thorough testing of app
 - Subtract an expense from total
+- Save totals_dict to csv
+- Add name to an expense
 
 ## License
 The content of this repository is licensed under a [Creative Commons Attribution License](http://creativecommons.org/licenses/by/3.0/us/)

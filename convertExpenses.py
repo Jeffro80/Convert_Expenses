@@ -1,5 +1,5 @@
 # Author: Jeff Mitchell
-# Date: 17 March 2019
+# Date: 18 March 2019
 # Version: 0.2
 # Quick Desc: Program to convert expenses into Annual, Monthly, Fortnightly and
 # Weekly
@@ -13,6 +13,25 @@
 import copy
 import custtools.admintools as ad
 import sys
+
+
+def confirm_reset():
+    """Confirm that user wishes to reset totals_dict.
+    
+    Returns:
+        (bool): True if to reset, False otherwise.
+    """
+    correct_input = False
+    while not correct_input:
+        reset = input('\nAre you sure that you want to reset the totals? '
+                      '(y/n): ').lower()
+        if reset not in ['y', 'n']:
+            print('\nSorry, that is not a valid selection. Please either '
+                  '"y" or "n".')
+        elif reset == "n":
+            return False
+        else:
+            return True
 
 
 def convert_expense(totals_dict):
@@ -36,78 +55,124 @@ def convert_expense(totals_dict):
     frequency = updated_totals['frequency']
     if frequency != 'annually':
         # Set amount to an annual amount
-        amount = convert_to_annual(amount, frequency)
+        amount = frequency_conversion(amount, frequency)
     # Convert amount to each frequency
     totals_list = []
     totals_list.append(updated_totals['amount'])
     totals_list.append(frequency)
-    totals_list.append(convert_to_weekly(amount))
-    totals_list.append(convert_to_fortnigthly(amount))
-    totals_list.append(convert_to_monthly(amount))
+    totals_list.append(convert_weekly(amount))
+    totals_list.append(convert_fortnightly(amount))
+    totals_list.append(convert_monthly(amount))
     totals_list.append(amount)
     # Update totals_dict
-    updated_totals['weekly'] += totals_list[2]
-    updated_totals['fortnightly'] += totals_list[3]
-    updated_totals['monthly'] += totals_list[4]
-    updated_totals['annually'] += totals_list[5]
+    updated_totals['total_weekly'] += totals_list[2]
+    updated_totals['total_fortnightly'] += totals_list[3]
+    updated_totals['total_monthly'] += totals_list[4]
+    updated_totals['total_annually'] += totals_list[5]
     # Display converted values for this amount and frequency    
     display_converted_amounts(totals_list)
     return updated_totals    
 
 
 def convert_fortnightly(annually):
-    local_fortnightly = annually / 26
-    return local_fortnightly
+    """Convert annual amount to fortnightly cost.
+    
+    Args:
+        annually (float): Annual cost.
+        
+    Returns:
+        (float): Fortnightly cost.
+    """
+    return annually / 26
 
 
 def convert_monthly(annually):
-    local_monthly = annually / 12
-    return local_monthly
+    """Convert annual amount to monthly cost.
+    
+    Args:
+        annually (float): Annual cost.
+        
+    Returns:
+        (float): Monthly cost.
+    """
+    return annually / 12
 	
 
-# convert annual expenses into weekly, fortnightly and monthly amounts
 def convert_weekly(annually):
-    local_weekly = annually / 52
-    return local_weekly
+    """Convert annual amount to weekly cost.
+    
+    Args:
+        annually (float): Annual cost.
+        
+    Returns:
+        (float): Weekly cost.
+    """
+    return annually / 52
 
 
 def display_converted_amounts(totals_list):
-    """Display conversion amounts per frequency for a total."""
-    print('\nA starting amount of ${} ({}) converts as follows: '.format(
-            totals_list[0], totals_list[1]))
-    print('\nWeekly it is: ${}'.format(totals_list[2]))
-    print('Fortnightly it is: ${}'.format(totals_list[3]))
-    print('Monthly it is: ${}'.format(totals_list[4]))
-    print('Annually it is: ${}'.format(totals_list[5]))
+    """Display conversion amounts per frequency for a total.
+    
+    Args:
+        totals_list (list): List with amount, frequency and totals starting
+        with weekly.
+    """
+    print('\nA starting amount of ${:.2f} ({}) converts as follows: '
+          .format(totals_list[0], totals_list[1]))
+    print('\nWeekly it is: ${:.2f}'.format(totals_list[2]))
+    print('Fortnightly it is: ${:.2f}'.format(totals_list[3]))
+    print('Monthly it is: ${:.2f}'.format(totals_list[4]))
+    print('Annually it is: ${:.2f}'.format(totals_list[5]))
 
 
-# display total amounts
-def display_total_amounts(weekly, fortnightly, monthly, annually):
-    print("\nTotal weekly expenses are: ${:.2f}" .format(weekly))
-    print("Total fortnightly expenses are: ${:.2f}" .format(fortnightly))
-    print("Total monthly expenses are: ${:.2f}" .format(monthly))
-    print("Total annual expenses are: ${:.2f}" .format(annually))
+def display_total_amounts(totals_dict):
+    """Display the total expenses for each period.
+    
+    Args:
+        totals_dict (dict): Dict with totals by frequency.
+    """
+    print('\nTotal weekly expenses are: ${:.2f}'.format(
+            totals_dict['total_weekly']))
+    print('Total fortnightly expenses are: ${:.2f}'.format(
+            totals_dict['total_fortnightly']))
+    print('Total monthly expenses are: ${:.2f}'.format(
+            totals_dict['total_monthly']))
+    print('Total annual expenses are: ${:.2f}'.format(
+            totals_dict['total_annually']))
 	
 	
-# convert fortnightly into annual expense
 def fortnightly_to_annual(fortnightly):
-    local_annual = fortnightly * 26
-    return local_annual
+    """Convert fortnightly amount to annual cost.
+    
+    Args:
+        fortnightly (float): Fortnightly cost.
+        
+    Returns:
+        (float): Annual cost.
+    """
+    return fortnightly * 26
 
 
-# make calculations by calling functions based on frequency.
-# expenses are converted to an annual amount
-# annual amount is then converted into the other three categories and returned
-def frequency_conversion(frequency, start_amount):
+def frequency_conversion(amount, frequency):
+    """Convert a start amount to an annual amount.
+    
+    Annual amount calculated according to the frequency of the amount.
+    
+    Args:
+        frequency (str): Frequency of payments.
+        amount (float): Expense amount per frequency period.
+    
+    Returns:
+        (float): Annual expense amount.
+    """
     if frequency == 'weekly':
-        local_annual = weekly_to_annual(start_amount)
+        return weekly_to_annual(amount)
     elif frequency == 'fortnightly':
-        local_annual = fortnightly_to_annual(start_amount)
+        return fortnightly_to_annual(amount)
     elif frequency == 'monthly':
-        local_annual = monthly_to_annual(start_amount)
+        return monthly_to_annual(amount)
     else:
-        local_annual = start_amount
-    return local_annual
+        return amount
 
 
 def get_amount():
@@ -239,20 +304,12 @@ def main():
             elif action == 2:
                 totals_dict = convert_expense(totals_dict)
             elif action == 3:
-                display_total_amounts(total_weekly, total_fortnightly, total_monthly, total_annually)
+                display_total_amounts(totals_dict)
             elif action == 4:
-                correct_input = False
-    			while correct_input == False:
-    				confirm_reset = input("\nAre you sure that yuo want to reset the totals? (y/n): ")
-    				confirm_reset = confirm_reset.lower()
-    				if confirm_reset != "y" and confirm_reset != "n":
-    					print("\nSorry, that is not a valid selection. Please either 'y' or 'n'.")
-    				elif confirm_reset == "n":
-    					correct_input = True
-    				else:
-    					total_weekly, total_fortnightly, total_monthly, total_annually = reset_totals()
-    					print("\nAll totals have been reset")
-    					correct_input = True
+                if not confirm_reset():
+                    continue
+                totals_dict = reset_totals(totals_dict)
+                print('\nAll totals have been reset.')
             elif action == high:
                 print('\nIf you have generated any files, please find them '
                       'saved to disk. Goodbye.')
@@ -275,61 +332,46 @@ def main_message():
     print('5. Exit')
 
 
-# convert monthly into annual expense
 def monthly_to_annual(monthly):
-    local_annual = monthly * 12
-    return local_annual
-
-
-# reset totals to zero
-def reset_totals():
-    local_weekly = 0
-    local_fortnightly = 0
-    local_monthly = 0
-    local_annual = 0
-    return local_weekly, local_fortnightly, local_monthly, local_annual
-
-
-
-
-
-# see if user wishes to repeat
-def user_repeat():
-    # y/n and check if neither selected
-    local_repeat = input("\nDo you want to continue with another amount or selection? (y/n): ")
-    local_repeat = local_repeat.lower()
-    if local_repeat != "y" and local_repeat != "n":
-        print("\nSorry, that is not a valid selection. Please either 'y' or 'n'.")
-        local_repeat = user_repeat()        
-    return local_repeat
-	
-	
-# get user selection
-def user_selection():
-    correct_input = False
-    while correct_input == False:
-        while True:
-            try:
-                local_selection = int(input("Please make a selection: "))
-            except ValueError:
-                print("\nSorry, that is not a valid selection. Please enter a number between 1 and 4.\n")
-                continue
-            else:
-                break
-
-        if local_selection > 0 and local_selection < 5:
-            correct_input = True
-        else:
-            print("\nYou must enter a number betweeen 1 and 4\n")
+    """Convert monthly amount to annual cost.
+    
+    Args:
+        monthly (float): Monthly cost.
         
-    # return selection
-    return local_selection
+    Returns:
+        (float): Annual cost.
+    """
+    return monthly * 12
 
 
-# convert weekly into annual expense
+def reset_totals(totals_dict):
+    """Reset totals_dict to zero for each variable.
+    
+    Args:
+        totals_dict (dict): Dictionary holding expense totals.
+        
+    Returns:
+        totals_dict (dict): totals_dict with expense totals rest to 0.
+    """
+    totals_dict['total_weekly'] = 0
+    totals_dict['total_fortnightly'] = 0
+    totals_dict['total_monthly'] = 0
+    totals_dict['total_annually'] = 0
+    totals_dict['frequency'] = ''
+    totals_dict['amount'] = 0
+    return totals_dict
+
+
 def weekly_to_annual(weekly):
-    local_annual = weekly * 52
-    return local_annual
+    """Convert weekly amount to annual cost.
+    
+    Args:
+        weekly (float): Weekly cost.
+        
+    Returns:
+        (float): Annual cost.
+    """
+    return weekly * 52
 	
 	
 if __name__ == '__main__':
